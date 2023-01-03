@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final fireStore = FirebaseFirestore.instance;
+
   @override
   void initState() {
     super.initState();
@@ -34,18 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+         backgroundColor: const Color(0xf4398c9a),
       body: Center(
         child: ElevatedButton(
             onPressed: () async {
               await _auth.signInAnonymously().then((value) async {
                await CacheHelper.setData(key: 'UserId',value:  value.user!.uid);
-               await fireStore
-                   .collection("Users")
-                   .doc(await CacheHelper
-                   .getData(
-                   key:
-                   'UserId'))
-                   .set({});
+
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(

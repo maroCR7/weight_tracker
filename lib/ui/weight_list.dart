@@ -40,6 +40,7 @@ class _WeightListState extends State<WeightList> {
                 child: CircularProgressIndicator(),
               );
             } else if (!snapshot.hasData) {
+
               return const Center(
                 child: CircularProgressIndicator(),
               );
@@ -176,6 +177,13 @@ class _WeightListState extends State<WeightList> {
                       ],
                     );
             } else {
+              fireStore
+                  .collection("Users")
+                  .doc(CacheHelper
+                  .getData(
+                  key:
+                  'UserId'))
+                  .set({});
               return const Center(
                 child: Text("There is no weights yet"),
               );
